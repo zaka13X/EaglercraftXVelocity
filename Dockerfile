@@ -1,10 +1,7 @@
-
 FROM dzufko/minecraft-eaglercraft:latest
-
 
 ENV TYPE=VELOCITY
 ENV EAGLER_VERSION=1.8.8-1.12.2
-ENV MEMORY=512M
-
+ENV MEMORY=375m
 EXPOSE 8081
 
