@@ -1,10 +1,10 @@
-
+# Use Liberica JDK 21 as requested
 FROM bellsoft/liberica-openjdk-alpine:21
+
 
 WORKDIR /server
 
 RUN apk add --no-cache curl
-
 
 RUN curl -o velocity.jar https://papermc.io
 
