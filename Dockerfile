@@ -1,4 +1,4 @@
-FROM dzufko/minecraft-eaglercraft:latest
+FROM dzufko/minecraft-eaglercraft
 
 ENV TYPE=VELOCITY
 ENV EAGLER_VERSION=1.8.8-1.12.2
