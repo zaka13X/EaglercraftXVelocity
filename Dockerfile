@@ -1,22 +1,22 @@
-# Use Liberica JDK 21 as requested
-FROM bellsoft/liberica-openjdk-alpine:21
+# Use a high-performance, premade Minecraft proxy image
+FROM itzg/bungeecord:latest
 
 
-WORKDIR /server
-
-RUN apk add --no-cache curl
-
-RUN curl -o velocity.jar https://papermc.io
+LABEL maintainer="Eaglercraft-Docker(zaka13 made dis)"
 
 
-RUN mkdir -p plugins && \
-    curl -L -o plugins/EaglerXServer.jar https://github.com
+ENV BACKEND_SERVER_NAME="lobby"
+ENV BACKEND_SERVER_IP="127.0.0.1"
+ENV BACKEND_SERVER_PORT="25565"
+
+ADD https://github.com /plugins/EaglerXBungee.jar
+
+RUN echo '#!/bin/bash\n\
+sed -i "s/address: localhost:25565/address: ${BACKEND_SERVER_IP}:${BACKEND_SERVER_PORT}/g" /server/config.yml\n\
+exec /start' > /entrypoint.sh && chmod +x /entrypoint.sh
 
 
-EXPOSE 25577
-
-
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+EXPOSE 8081
 
 ENTRYPOINT ["/entrypoint.sh"]
+
